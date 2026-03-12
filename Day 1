@@ -1,0 +1,185 @@
+### 1. You are given an array of n integers. Find the number of sub arrays whose sum is even and starts with an odd number.
+
+
+```cpp
+long long solve(vector<int>& arr) {
+    int n = arr.size();
+    long long count = 0;
+    for (int i = 0; i < n; i++) {
+        if (arr[i] % 2 != 0) {
+            long long current_sum = 0;
+            for (int j = i; j < n; j++) {
+                current_sum += arr[j];
+                if (current_sum % 2 == 0) count++;
+            }
+        }
+    }
+    return count;
+}
+
+```
+
+### 2. Given an array of n integers, find the maximum sum of a subarray where no two adjacent elements are selected.
+
+
+```cpp
+long long maxSum(vector<int>& arr) {
+    int n = arr.size();
+    if (n == 0) return 0;
+    long long prev2 = 0, prev1 = max(0, arr[0]);
+    for (int i = 1; i < n; i++) {
+        long long curr = max(prev1, (long long)arr[i] + prev2);
+        prev2 = prev1;
+        prev1 = curr;
+    }
+    return prev1;
+}
+
+```
+
+### 3.  You have an array A of size n, initialized to 0. You are given q queries of the form l r val. For each query, increment every element in A[l] to A[r] by val. After all queries, print the final array.
+
+
+```cpp
+void rangeUpdate(int n, vector<vector<int>>& queries) {
+    vector<long long> diff(n + 1, 0);
+    for (auto& q : queries) {
+        int l = q[0], r = q[1], val = q[2];
+        diff[l] += val;
+        if (r + 1 < n) diff[r + 1] -= val;
+    }
+    vector<long long> A(n);
+    long long curr = 0;
+    for (int i = 0; i < n; i++) {
+        curr += diff[i];
+        A[i] = curr;
+        cout << A[i] << " ";
+    }
+}
+
+```
+
+### 4. Given a string S, for each index i from 0 to len(S)-1, print the number of times S[i] has appeared in the prefix S[0:i].
+
+
+```cpp
+void prefixFreq(string S) {
+    unordered_map<char, int> freq;
+    for (char c : S) {
+        cout << freq[c] << " ";
+        freq[c]++;
+    }
+}
+
+```
+
+### 5. You're given an array A and q queries. Each query has l and r. For each query, print the XOR of all values in the range A[l] to A[r].
+
+
+```cpp
+void rangeXor(vector<int>& A, vector<pair<int, int>>& queries) {
+    int n = A.size();
+    vector<int> pref(n + 1, 0);
+    for (int i = 0; i < n; i++) pref[i + 1] = pref[i] ^ A[i];
+    for (auto& q : queries) {
+        cout << (pref[q.second + 1] ^ pref[q.first]) << endl;
+    }
+}
+
+```
+
+### 6. Given an array A of n integers, count the number of increasing triplets (i, j, k) such that: i < j < k and A[i] < A[j] < A[k]
+
+
+```cpp
+long long countTriplets(vector<int>& A) {
+    int n = A.size();
+    long long total = 0;
+    for (int j = 0; j < n; j++) {
+        int small = 0, large = 0;
+        for (int i = 0; i < j; i++) if (A[i] < A[j]) small++;
+        for (int k = j + 1; k < n; k++) if (A[k] > A[j]) large++;
+        total += (long long)small * large;
+    }
+    return total;
+}
+
+```
+
+### 7. Given an array A of n integers, find the sum of all subarrays. Output result modulo 109+7
+
+
+```cpp
+long long sumSubarrays(vector<int>& A) {
+    long long n = A.size(), mod = 1e9 + 7, total = 0;
+    for (int i = 0; i < n; i++) {
+        long long count = (i + 1) * (n - i) % mod;
+        total = (total + (A[i] * count) % mod) % mod;
+    }
+    return total;
+}
+
+```
+
+### 8. You’re given an array of integers. Find the k-th smallest element that appears only once in the array. If not possible, print -1.
+
+
+```cpp
+int kthUnique(vector<int>& A, int k) {
+    map<int, int> freq;
+    for (int x : A) freq[x]++;
+    int count = 0;
+    for (auto const& [val, occ] : freq) {
+        if (occ == 1) {
+            count++;
+            if (count == k) return val;
+        }
+    }
+    return -1;
+}
+
+```
+
+### 9.  You're given a string S and a pattern P. You need to assign scores to S based on occurrences of P. For every occurrence of P as a substring in S, add len(P)^2 to the score. Return the total score.
+
+
+```cpp
+long long patternScore(string S, string P) {
+    if (P.empty()) return 0;
+    long long score = 0, lenP = P.length();
+    size_t pos = S.find(P, 0);
+    while (pos != string::npos) {
+        score += lenP * lenP;
+        pos = S.find(P, pos + 1); // Allows overlapping
+    }
+    return score;
+}
+
+```
+
+### 10. You are given an array A of size n, initially 0.
+There are q operations. Each operation has the form:
+l r x y — assign to subarray A[l..r] the arithmetic sequence:
+A[l] = x, A[l+1] = x+y, ..., A[r] = x + (r-l)*y
+After all operations, find the length of the longest contiguous arithmetic subarray in
+the final array.
+
+
+```cpp
+int longestArithmetic(vector<long long>& A) {
+    int n = A.size();
+    if (n <= 2) return n;
+    int maxLen = 2, currLen = 2;
+    long long diff = A[1] - A[0];
+    for (int i = 2; i < n; i++) {
+        if (A[i] - A[i-1] == diff) currLen++;
+        else {
+            diff = A[i] - A[i-1];
+            currLen = 2;
+        }
+        maxLen = max(maxLen, currLen);
+    }
+    return maxLen;
+}
+
+```
