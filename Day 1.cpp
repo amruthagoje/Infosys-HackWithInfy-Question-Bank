@@ -1,4 +1,4 @@
-1. You are given an array of n integers. Find the number of sub arrays whose sum is even and starts with an odd number.
+//1. You are given an array of n integers. Find the number of sub arrays whose sum is even and starts with an odd number.
 
 
 long long solve(vector<int>& arr) {
@@ -17,7 +17,7 @@ long long solve(vector<int>& arr) {
 }
 
 
-2. Given an array of n integers, find the maximum sum of a subarray where no two adjacent elements are selected.
+//2. Given an array of n integers, find the maximum sum of a subarray where no two adjacent elements are selected.
 
 
 long long maxSum(vector<int>& arr) {
@@ -33,7 +33,7 @@ long long maxSum(vector<int>& arr) {
 }
 
 
-3.  You have an array A of size n, initialized to 0. You are given q queries of the form l r val. For each query, increment every element in A[l] to A[r] by val. After all queries, print the final array.
+//3.  You have an array A of size n, initialized to 0. You are given q queries of the form l r val. For each query, increment every element in A[l] to A[r] by val. After all queries, print the final array.
 
 
 void rangeUpdate(int n, vector<vector<int>>& queries) {
@@ -53,7 +53,7 @@ void rangeUpdate(int n, vector<vector<int>>& queries) {
 }
 
 
-4. Given a string S, for each index i from 0 to len(S)-1, print the number of times S[i] has appeared in the prefix S[0:i].
+//4. Given a string S, for each index i from 0 to len(S)-1, print the number of times S[i] has appeared in the prefix S[0:i].
 
 
 void prefixFreq(string S) {
@@ -65,7 +65,7 @@ void prefixFreq(string S) {
 }
 
 
-5. You're given an array A and q queries. Each query has l and r. For each query, print the XOR of all values in the range A[l] to A[r].
+//5. You're given an array A and q queries. Each query has l and r. For each query, print the XOR of all values in the range A[l] to A[r].
 
 
 void rangeXor(vector<int>& A, vector<pair<int, int>>& queries) {
@@ -78,7 +78,7 @@ void rangeXor(vector<int>& A, vector<pair<int, int>>& queries) {
 }
 
 
-6. Given an array A of n integers, count the number of increasing triplets (i, j, k) such that: i < j < k and A[i] < A[j] < A[k]
+//6. Given an array A of n integers, count the number of increasing triplets (i, j, k) such that: i < j < k and A[i] < A[j] < A[k]
 
 
 long long countTriplets(vector<int>& A) {
@@ -94,7 +94,7 @@ long long countTriplets(vector<int>& A) {
 }
 
 
-7. Given an array A of n integers, find the sum of all subarrays. Output result modulo 109+7
+//7. Given an array A of n integers, find the sum of all subarrays. Output result modulo 109+7
 
 
 long long sumSubarrays(vector<int>& A) {
@@ -107,7 +107,7 @@ long long sumSubarrays(vector<int>& A) {
 }
 
 
-8. You’re given an array of integers. Find the k-th smallest element that appears only once in the array. If not possible, print -1.
+//8. You’re given an array of integers. Find the k-th smallest element that appears only once in the array. If not possible, print -1.
 
 
 int kthUnique(vector<int>& A, int k) {
@@ -124,7 +124,7 @@ int kthUnique(vector<int>& A, int k) {
 }
 
 
-9.  You're given a string S and a pattern P. You need to assign scores to S based on occurrences of P. For every occurrence of P as a substring in S, add len(P)^2 to the score. Return the total score.
+//9.  You're given a string S and a pattern P. You need to assign scores to S based on occurrences of P. For every occurrence of P as a substring in S, add len(P)^2 to the score. Return the total score.
 
 
 long long patternScore(string S, string P) {
@@ -133,18 +133,18 @@ long long patternScore(string S, string P) {
     size_t pos = S.find(P, 0);
     while (pos != string::npos) {
         score += lenP * lenP;
-        pos = S.find(P, pos + 1); // Allows overlapping
+        pos = S.find(P, pos + 1); 
     }
     return score;
 }
 
 
-10. You are given an array A of size n, initially 0.
+/*10. You are given an array A of size n, initially 0.
 There are q operations. Each operation has the form:
 l r x y — assign to subarray A[l..r] the arithmetic sequence:
 A[l] = x, A[l+1] = x+y, ..., A[r] = x + (r-l)*y
 After all operations, find the length of the longest contiguous arithmetic subarray in
-the final array.
+the final array.*/
 
 
 int longestArithmetic(vector<long long>& A) {
